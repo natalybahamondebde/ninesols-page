@@ -1,0 +1,45 @@
+---
+// src/components/SpeedrunClip.astro
+// Grid 2 columnas: Video | Título+Desc+Inputs. Altura video 350px, fondo sólido
+const {
+    videoId = '19lj7-7IQB6EJM5r4iu6R1C-Mx_WHV0Qg',
+    title = 'Dash → Talisman → Parry Skip',
+    description = 'Truco Any% Bell Route: dash para posicionar, talisman para iframe, parry en ventana perfecta.',
+    inputs = ['dash', 'talisman', 'parry'],
+    width = '600',    // Tu width original
+    height = '350'    // Tu height original fija
+} = Astro.props;
+---
+
+<div class="w-300 self-center bg-[#408A71]/5 rounded-3xl p-2 px-5 border border-[#408A71]/50 my-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 items-center gap-10">
+
+        <!-- Columna 1: Video (tamaños exactos) -->
+        <div class="justify-center flex flex-col">
+            <div class="w-[600px] h-[350px] max-w-full">
+                <iframe
+                        src=`https://drive.google.com/file/d/${videoId}/preview`
+                        width="600"
+                        height="350"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Columna 2: Título + Descripción + Inputs -->
+        <div class="flex flex-col gap-3 lg:pl-8">
+
+            <!-- Título -->
+            <h3 class="text-3xl font-bold text-white mb-2 flex flex-col gap-2">
+                {title}
+                <div class="h-1 w-100 bg-[#408A71]"></div>
+            </h3>
+
+
+            <!-- Descripción -->
+            <p class="text-slate-300/70 leading-8 text-base flex flex-col">
+                {description}
+            </p>
+        </div>
+    </div>
+</div>

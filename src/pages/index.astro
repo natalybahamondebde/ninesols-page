@@ -1,11 +1,85 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import VideoComponent from "../components/videoComponent.astro";
+import BannerComponent from "../components/bannerComponent.astro";
+import TipsComponent from "../components/tipsComponent.astro";
 ---
 
 <Layout>
-	<Welcome />
+    <div class="h-20"></div>
+    <BannerComponent />
+    <div class="grid grid-cols-4 h-10 justify-center items-center">
+        <p class="text-white text-center border-b-2 border-b-[#408A71] py-3 bg-[#408A71]/20 font-bold cursor-pointer flex flex-row justify-center items-center gap-2 font-body"><img class="h-7 w-8 flex" src="https://ninesols.wiki.gg/images/thumb/Skill-Immortal_Dash.png/50px-Skill-Immortal_Dash.png?740f1f"></img>TECH</p>
+        <a href="/index_tricks"><p class="text-gray-400 bg-[#408A71]/10 font-bold text-center py-3 hover:text-[#408A71] transition-all duration-300 flex flex-row justify-center items-center gap-2 font-body hover:bg-[#408A71]/15"><img class="h-7 w-8 flex" src="https://ninesols.wiki.gg/images/thumb/Skill-Bullet_Deflect.png/50px-Skill-Bullet_Deflect.png?3d4ebc"></img>TRICKS</p></a>
+        <a href="/index_glitches"><p class="text-gray-400 font-bold text-center bg-[#408A71]/10 py-3 hover:text-[#408A71] transition-all duration-300 flex flex-row justify-center items-center gap-2 font-body hover:bg-[#408A71]/15"><img class="h-7 w-8 flex" src="https://ninesols.wiki.gg/images/thumb/Skill-Leverage.png/50px-Skill-Leverage.png?931e30"></img>GLITCHES</p></a>
+        <a href="/index_bosses"><p class="text-gray-400 font-bold text-center bg-[#408A71]/10 py-3 hover:text-[#408A71] transition-all duration-300 flex flex-row justify-center items-center gap-2 font-body hover:bg-[#408A71]/15"><img class="h-7 w-8 flex" src="https://ninesols.wiki.gg/images/thumb/Skill-Enhanced_Water_Flow.png/50px-Skill-Enhanced_Water_Flow.png?ed5c64">BOSSES STRATS</p></a>
+    </div>
+    <div class="w-full h-300 my-2">
+        <div>
+            <TipsComponent />
+            <div class="grid grid-cols-2 w-full h-20 mt-15">
+                <div class="bg-red-800 ml-90 relative overflow-hidden group cursor-pointer select-none before:absolute before:inset-0 before:bg-black/40 before:transition-all before:duration-300 before:z-10 after:absolute after:inset-0 after:flex after:items-center after:justify-center after:content-['MOVEMENT'] after:text-white after:text-2xl after:font-body after:tracking-widest after:z-20 after:pointer-events-none">
+                    <div class="h-1 absolute z-90 w-full bg-[#285A48] "></div>
+                    <img src="https://i.namu.wiki/i/UIjEOOuPe7uxawBsPpA_IKYJTjzeNCNFucSRPOLz1f6Ebw81-hrLGSJjk12rGj2nSd51xXh8gc2uYpierdEmWA.gif" class="w-full h-full object-cover object-[center_100%] relative z-0">
+                </div>
+                <div class="bg-red-800 mr-90 relative overflow-hidden group cursor-pointer select-none before:absolute before:inset-0 before:bg-black/70 before:transition-all before:duration-300 before:z-10 hover:before:bg-black/40 after:absolute after:inset-0 after:flex after:items-center after:justify-center after:content-['COMBAT'] after:text-white/50 after:text-2xl after:font-body after:tracking-widest after:z-20 after:pointer-events-none">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyXsNKAgpfC76k8Y_f1sodOiqPxclry7xVkc6mw0EQxto_fpTcpRwoCVpHsTryeuTuZNhLVNsqqQKpNjmsPl9EixMFgUyKDz6eQkoj2gjqemPf9XQz4EK5wraXND8sZC7qpgj7ZGUtHsssnPIigrDgiDrXIvsWyXFgb2Z5whrJBUMdXlFOs6NQHT-KaHUp/s600/nine-sols-05.gif" class="w-full h-full object-cover object-[center_80%] relative z-0">
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="mx-30">
+                <VideoComponent
+                        title="Wavedashing"
+                        description="Slightly slower than bunnyhop airdashing, but allows for more I-frames. Use the fast fall to reset dash cd, and dash immediately, then jump at the end of the dash and repeat the process.
+                "
+                        inputs={['dash↑', 'talisman', 'parry', 'nail×3']}
+                        videoId="19lj7-7IQB6EJM5r4iu6R1C-Mx_WHV0Qg"
+                />
+                <VideoComponent
+                        title="Bunnyhop with airdash"
+                        description="Jump and immediately airdash. Every time you touch the ground it resets the airdash
+                "
+                        inputs={['dash↑', 'talisman', 'parry', 'nail×3']}
+                        videoId="1TnGI2T6KKA2PZp37d95x9eqrFNOJsZtH"
+                />
+            </div>
+
+        </div>
+    </div>
+
 </Layout>
+
+<script>
+    let currentSlide = 0;
+    const slides = ['item1', 'item2', 'item3', 'item4'];
+
+    // Función scroll suave
+    const goToSlide = (targetId) => {
+        const carousel = document.querySelector('.carousel');
+        const target = document.querySelector(`#${targetId}`);
+
+        if (carousel && target) {
+            carousel.scrollTo({
+                left: target.offsetLeft,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    // Fix botones: preventDefault + scroll manual
+    document.querySelectorAll('.no-jump').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();  // ¡Bloquea el salto!
+            const targetId = btn.dataset.slide;
+            goToSlide(targetId);
+            currentSlide = slides.indexOf(targetId);
+        });
+    });
+
+    // Auto-advance (igual que antes)
+    const autoSlide = () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        goToSlide(slides[currentSlide]);
+    };
+
+</script>

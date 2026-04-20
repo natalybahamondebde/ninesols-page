@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+import VideoComponent from "../components/videoComponent.astro";
+import BannerComponent from "../components/bannerComponent.astro";
+import TipsComponent from "../components/tipsComponent.astro";
+---
+
+<Layout>
+    <div class="h-20"></div>
+    <BannerComponent />
+    <div class="grid grid-cols-4 h-10 justify-center items-center">
+        <a href="/"><p class="text-gray-400 font-bold text-center bg-[#408A71]/10 py-3 hover:text-[#408A71] transition-all duration-300 flex flex-row justify-center items-center gap-2 font-body hover:bg-[#408A71]/15"><img class="h-7 w-8 flex" src="https://ninesols.wiki.gg/images/thumb/Skill-Immortal_Dash.png/50px-Skill-Immortal_Dash.png?740f1f"></img>TECH</p></a>
+        <a href="/index_tricks"><p class="text-gray-400 font-bold text-center bg-[#408A71]/10 py-3 hover:text-[#408A71] transition-all duration-300 flex flex-row justify-center items-center gap-2 font-body hover:bg-[#408A71]/15"><img class="h-7 w-8 flex" src="https://ninesols.wiki.gg/images/thumb/Skill-Bullet_Deflect.png/50px-Skill-Bullet_Deflect.png?3d4ebc"></img>TRICKS</p></a>
+        <a href="/index_glitches"><p class="text-gray-400 font-bold text-center bg-[#408A71]/10 py-3 hover:text-[#408A71] transition-all duration-300 flex flex-row justify-center items-center gap-2 font-body hover:bg-[#408A71]/15"><img class="h-7 w-8 flex" src="https://ninesols.wiki.gg/images/thumb/Skill-Leverage.png/50px-Skill-Leverage.png?931e30"></img>GLITCHES</p></a>
+        <a href="/index_bosses"><p class="text-white text-center border-b-2 border-b-[#408A71] py-3 bg-[#408A71]/20 font-bold cursor-pointer flex flex-row justify-center items-center gap-2 font-body"><img class="h-7 w-8 flex" src="https://ninesols.wiki.gg/images/thumb/Skill-Enhanced_Water_Flow.png/50px-Skill-Enhanced_Water_Flow.png?ed5c64">BOSSES STRATS</p></a>
+    </div>
+    <div class="w-full h-300 my-2">
+        <div>
+            <TipsComponent />
+            <div class="divider"></div>
+            <div class="mx-30">
+                <VideoComponent
+                        title="Early Airdash"
+                        description="Needs 2 talisman and patience. Can probably be done with just one if you lure the enemy all around without having it die to spikes.
+                "
+                        inputs={['dash↑', 'talisman', 'parry', 'nail×3']}
+                        videoId="1Aw0Mgu6KiWONOIWWlh4Mv-Q78iXBlNEW"
+                />
+                <VideoComponent
+                        title="Early Celestial Spectre"
+                        description="
+                "
+                        inputs={['dash↑', 'talisman', 'parry', 'nail×3']}
+                        videoId="1U4nkH4RnBJV0EydCso_saoifLxPJEc4g"
+                />
+            </div>
+
+        </div>
+    </div>
+
+</Layout>
+
+<script>
+    let currentSlide = 0;
+    const slides = ['item1', 'item2', 'item3', 'item4'];
+
+    // Función scroll suave
+    const goToSlide = (targetId) => {
+        const carousel = document.querySelector('.carousel');
+        const target = document.querySelector(`#${targetId}`);
+
+        if (carousel && target) {
+            carousel.scrollTo({
+                left: target.offsetLeft,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    // Fix botones: preventDefault + scroll manual
+    document.querySelectorAll('.no-jump').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();  // ¡Bloquea el salto!
+            const targetId = btn.dataset.slide;
+            goToSlide(targetId);
+            currentSlide = slides.indexOf(targetId);
+        });
+    });
+
+    // Auto-advance (igual que antes)
+    const autoSlide = () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        goToSlide(slides[currentSlide]);
+    };
+
+</script>
